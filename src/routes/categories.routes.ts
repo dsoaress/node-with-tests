@@ -9,12 +9,11 @@ import { importCategoriesController } from '../modules/cars/useCases/importCateg
 import { updateCategoryController } from '../modules/cars/useCases/updateCategory'
 
 const categoriesRouter = Router()
-const upload = multer({ dest: 'tmp/' })
+const multerMiddleware = multer({ dest: 'tmp/' })
+const upload = multerMiddleware.single('file')
 
 categoriesRouter.post('/', (req, res) => createCategoryController.handle(req, res))
-categoriesRouter.post('/import', upload.single('file'), (req, res) =>
-  importCategoriesController.handle(req, res)
-)
+categoriesRouter.post('/import', upload, (req, res) => importCategoriesController.handle(req, res))
 categoriesRouter.get('/', (req, res) => findAllCategoriesController.handle(req, res))
 categoriesRouter.get('/:id', (req, res) => findCategoryController.handle(req, res))
 categoriesRouter.put('/:id', (req, res) => updateCategoryController.handle(req, res))
