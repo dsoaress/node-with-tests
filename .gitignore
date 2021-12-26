@@ -29,3 +29,6 @@ tmp/*
 # dotenv environment variables file
 .env
 .env.test
+
+# Misc
+.DS_Store

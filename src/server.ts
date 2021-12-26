@@ -1,5 +1,6 @@
 import express from 'express'
 
+import { env } from './config/env'
 import { router } from './routes'
 
 const app = express()
@@ -7,4 +8,4 @@ const app = express()
 app.use(express.json())
 app.use(router)
 
-app.listen(3010, () => console.log('Server is running on port 3010'))
+app.listen(env.PORT, () => console.log(`Server is running on port ${env.PORT}`))
