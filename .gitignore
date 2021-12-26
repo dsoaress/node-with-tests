@@ -16,6 +16,10 @@ node_modules/
 # Distribution directories
 dist/
 
+# Temp directory
+tmp/*
+!tmp/.gitkeep
+
 # TypeScript cache
 *.tsbuildinfo
 

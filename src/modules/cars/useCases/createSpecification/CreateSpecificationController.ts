@@ -7,9 +7,7 @@ export class CreateSpecificationController {
 
   async handle(req: Request, res: Response): Promise<Response<Specification>> {
     const { name, description } = req.body
-
     const specification = await this.createSpecificationUseCase.execute({ name, description })
-
     return res.status(201).json(specification)
   }
 }

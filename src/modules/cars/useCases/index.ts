@@ -12,6 +12,7 @@ import {
 } from './findAllSpecifications'
 import { FindCategoryController, FindCategoryUseCase } from './findCategory'
 import { FindSpecificationController, FindSpecificationUseCase } from './findSpecification'
+import { ImportCategoriesController, ImportCategoriesUseCase } from './importCategories'
 import { UpdateCategoryController, UpdateCategoryUseCase } from './updateCategory'
 import { UpdateSpecificationController, UpdateSpecificationUseCase } from './updateSpecification'
 
@@ -19,12 +20,14 @@ const categoriesRepository = CategoriesRepository.getInstance()
 const specificationsRepository = SpecificationsRepository.getInstance()
 
 const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
+const importCategoriesUseCase = new ImportCategoriesUseCase(categoriesRepository)
 const findAllCategoriesUseCase = new FindAllCategoriesUseCase(categoriesRepository)
 const findCategoryUseCase = new FindCategoryUseCase(categoriesRepository)
 const updateCategoryUseCase = new UpdateCategoryUseCase(categoriesRepository)
 const deleteCategoryUseCase = new DeleteCategoryUseCase(categoriesRepository)
 
 const createCategoryController = new CreateCategoryController(createCategoryUseCase)
+const importCategoriesController = new ImportCategoriesController(importCategoriesUseCase)
 const findAllCategoriesController = new FindAllCategoriesController(findAllCategoriesUseCase)
 const findCategoryController = new FindCategoryController(findCategoryUseCase)
 const updateCategoryController = new UpdateCategoryController(updateCategoryUseCase)
@@ -46,6 +49,7 @@ const deleteSpecificationController = new DeleteSpecificationController(deleteSp
 
 export {
   createCategoryController,
+  importCategoriesController,
   findAllCategoriesController,
   findCategoryController,
   updateCategoryController,
