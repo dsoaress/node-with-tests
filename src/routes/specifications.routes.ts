@@ -1,12 +1,10 @@
 import { Router } from 'express'
 
-import {
-  createSpecificationController,
-  deleteSpecificationController,
-  findAllSpecificationsController,
-  findSpecificationController,
-  updateSpecificationController
-} from '../modules/cars/useCases'
+import { createSpecificationController } from '../modules/cars/useCases/createSpecification'
+import { deleteSpecificationController } from '../modules/cars/useCases/deleteSpecification'
+import { findAllSpecificationsController } from '../modules/cars/useCases/findAllSpecifications'
+import { findSpecificationController } from '../modules/cars/useCases/findSpecification'
+import { updateSpecificationController } from '../modules/cars/useCases/updateSpecification'
 
 const specificationsRouter = Router()
 

@@ -1,14 +1,12 @@
 import { Router } from 'express'
 import multer from 'multer'
 
-import {
-  createCategoryController,
-  deleteCategoryController,
-  findAllCategoriesController,
-  findCategoryController,
-  importCategoriesController,
-  updateCategoryController
-} from '../modules/cars/useCases'
+import { createCategoryController } from '../modules/cars/useCases/createCategory'
+import { deleteCategoryController } from '../modules/cars/useCases/deleteCategory'
+import { findAllCategoriesController } from '../modules/cars/useCases/findAllCategories'
+import { findCategoryController } from '../modules/cars/useCases/findCategory'
+import { importCategoriesController } from '../modules/cars/useCases/importCategories'
+import { updateCategoryController } from '../modules/cars/useCases/updateCategory'
 
 const categoriesRouter = Router()
 const upload = multer({ dest: 'tmp/' })

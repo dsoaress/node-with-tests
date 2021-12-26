@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rent cars API",
+    "description": "API for renting cars",
+    "version": "0.0.0",
+    "contact": {
+      "name": "Daniel Soares",
+      "email": "daniel.soares@me.com"
+    }
+  }
+}
