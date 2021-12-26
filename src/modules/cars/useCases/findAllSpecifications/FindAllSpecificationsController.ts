@@ -1,6 +1,6 @@
-import type { FindAllSpecificationsUseCase } from './FindAllSpecificationsUseCase'
 import type { Request, Response } from 'express'
 import type { Specification } from '../../models/Specification'
+import type { FindAllSpecificationsUseCase } from './FindAllSpecificationsUseCase'
 
 export class FindAllSpecificationsController {
   constructor(private findAllSpecificationsUseCase: FindAllSpecificationsUseCase) {}

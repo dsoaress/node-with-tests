@@ -1,6 +1,6 @@
-import type { ImportCategoriesUseCase } from './ImportCategoriesUseCase'
-import type { Category } from '../../models/Category'
 import type { Request, Response } from 'express'
+import type { Category } from '../../models/Category'
+import type { ImportCategoriesUseCase } from './ImportCategoriesUseCase'
 
 export class ImportCategoriesController {
   constructor(private importCategoriesUseCase: ImportCategoriesUseCase) {}

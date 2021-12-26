@@ -1,6 +1,6 @@
-import type { UpdateCategoryUseCase } from './UpdateCategoryUseCase'
 import type { Request, Response } from 'express'
 import type { Category } from '../../models/Category'
+import type { UpdateCategoryUseCase } from './UpdateCategoryUseCase'
 
 export class UpdateCategoryController {
   constructor(private updateCategoryUseCase: UpdateCategoryUseCase) {}

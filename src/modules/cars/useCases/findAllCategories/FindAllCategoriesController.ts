@@ -1,6 +1,6 @@
-import type { FindAllCategoriesUseCase } from './FindAllCategoriesUseCase'
 import type { Request, Response } from 'express'
 import type { Category } from '../../models/Category'
+import type { FindAllCategoriesUseCase } from './FindAllCategoriesUseCase'
 
 export class FindAllCategoriesController {
   constructor(private findAllCategoriesUseCase: FindAllCategoriesUseCase) {}

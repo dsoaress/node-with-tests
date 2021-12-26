@@ -1,6 +1,6 @@
-import type { CreateCategoryUseCase } from './CreateCategoryUseCase'
-import type { Category } from '../../models/Category'
 import type { Request, Response } from 'express'
+import type { Category } from '../../models/Category'
+import type { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
 export class CreateCategoryController {
   constructor(private createCategoryUseCase: CreateCategoryUseCase) {}

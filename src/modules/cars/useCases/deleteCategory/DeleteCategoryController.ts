@@ -1,5 +1,5 @@
-import type { DeleteCategoryUseCase } from './DeleteCategoryUseCase'
 import type { Request, Response } from 'express'
+import type { DeleteCategoryUseCase } from './DeleteCategoryUseCase'
 
 export class DeleteCategoryController {
   constructor(private deleteCategoryUseCase: DeleteCategoryUseCase) {}

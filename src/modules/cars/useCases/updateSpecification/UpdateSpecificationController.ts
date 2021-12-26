@@ -1,6 +1,6 @@
-import type { UpdateSpecificationUseCase } from './UpdateSpecificationUseCase'
 import type { Request, Response } from 'express'
 import type { Specification } from '../../models/Specification'
+import type { UpdateSpecificationUseCase } from './UpdateSpecificationUseCase'
 
 export class UpdateSpecificationController {
   constructor(private updateSpecificationUseCase: UpdateSpecificationUseCase) {}

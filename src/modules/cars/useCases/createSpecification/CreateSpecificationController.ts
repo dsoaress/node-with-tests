@@ -1,6 +1,6 @@
-import type { CreateSpecificationUseCase } from './CreateSpecificationUseCase'
-import type { Specification } from '../../models/Specification'
 import type { Request, Response } from 'express'
+import type { Specification } from '../../models/Specification'
+import type { CreateSpecificationUseCase } from './CreateSpecificationUseCase'
 
 export class CreateSpecificationController {
   constructor(private createSpecificationUseCase: CreateSpecificationUseCase) {}

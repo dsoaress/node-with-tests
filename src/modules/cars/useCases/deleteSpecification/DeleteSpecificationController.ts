@@ -1,5 +1,5 @@
-import type { DeleteSpecificationUseCase } from './DeleteSpecificationUseCase'
 import type { Request, Response } from 'express'
+import type { DeleteSpecificationUseCase } from './DeleteSpecificationUseCase'
 
 export class DeleteSpecificationController {
   constructor(private deleteSpecificationUseCase: DeleteSpecificationUseCase) {}
