@@ -1,8 +1,14 @@
+import { inject, injectable } from 'tsyringe'
+
 import type { CreateSpecificationDTO } from '../../repositories/implementations/SpecificationsRepository'
 import type { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
 
+@injectable()
 export class CreateSpecificationUseCase {
-  constructor(private specificationsRepository: SpecificationsRepositoryInterface) {}
+  constructor(
+    @inject('SpecificationsRepository')
+    private specificationsRepository: SpecificationsRepositoryInterface
+  ) {}
 
   async execute({ name, description }: CreateSpecificationDTO) {
     if (!name || !description) {

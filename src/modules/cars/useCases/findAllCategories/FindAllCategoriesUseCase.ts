@@ -1,7 +1,13 @@
+import { inject, injectable } from 'tsyringe'
+
 import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 
+@injectable()
 export class FindAllCategoriesUseCase {
-  constructor(private categoriesRepository: CategoriesRepositoryInterface) {}
+  constructor(
+    @inject('CategoriesRepository')
+    private categoriesRepository: CategoriesRepositoryInterface
+  ) {}
 
   async execute() {
     const categories = await this.categoriesRepository.findAll()

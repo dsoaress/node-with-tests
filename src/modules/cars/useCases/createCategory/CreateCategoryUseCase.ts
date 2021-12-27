@@ -1,8 +1,14 @@
+import { inject, injectable } from 'tsyringe'
+
 import type { CreateCategoryDTO } from '../../repositories/implementations/CategoriesRepository'
 import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 
+@injectable()
 export class CreateCategoryUseCase {
-  constructor(private categoriesRepository: CategoriesRepositoryInterface) {}
+  constructor(
+    @inject('CategoriesRepository')
+    private categoriesRepository: CategoriesRepositoryInterface
+  ) {}
 
   async execute({ name, description }: CreateCategoryDTO) {
     if (!name || !description) {

@@ -1,7 +1,13 @@
+import { inject, injectable } from 'tsyringe'
+
 import type { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
 
+@injectable()
 export class FindSpecificationUseCase {
-  constructor(private specificationsRepository: SpecificationsRepositoryInterface) {}
+  constructor(
+    @inject('SpecificationsRepository')
+    private specificationsRepository: SpecificationsRepositoryInterface
+  ) {}
 
   async execute(id: string) {
     const specification = await this.specificationsRepository.findById(id)

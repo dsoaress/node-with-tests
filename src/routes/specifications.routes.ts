@@ -1,17 +1,23 @@
 import { Router } from 'express'
 
-import createSpecificationController from '../modules/cars/useCases/createSpecification'
-import deleteSpecificationController from '../modules/cars/useCases/deleteSpecification'
-import findAllSpecificationsController from '../modules/cars/useCases/findAllSpecifications'
-import findSpecificationController from '../modules/cars/useCases/findSpecification'
-import updateSpecificationController from '../modules/cars/useCases/updateSpecification'
+import { CreateSpecificationController } from '../modules/cars/useCases/createSpecification/CreateSpecificationController'
+import { DeleteSpecificationController } from '../modules/cars/useCases/deleteSpecification/DeleteSpecificationController'
+import { FindAllSpecificationsController } from '../modules/cars/useCases/findAllSpecifications/FindAllSpecificationsController'
+import { FindSpecificationController } from '../modules/cars/useCases/findSpecification/FindSpecificationController'
+import { UpdateSpecificationController } from '../modules/cars/useCases/updateSpecification/UpdateSpecificationController'
 
 const specificationsRouter = Router()
 
-specificationsRouter.post('/', (req, res) => createSpecificationController().handle(req, res))
-specificationsRouter.get('/', (req, res) => findAllSpecificationsController().handle(req, res))
-specificationsRouter.get('/:id', (req, res) => findSpecificationController().handle(req, res))
-specificationsRouter.put('/:id', (req, res) => updateSpecificationController().handle(req, res))
-specificationsRouter.delete('/:id', (req, res) => deleteSpecificationController().handle(req, res))
+const createSpecificationController = new CreateSpecificationController()
+const findAllSpecificationsController = new FindAllSpecificationsController()
+const findSpecificationController = new FindSpecificationController()
+const updateSpecificationController = new UpdateSpecificationController()
+const deleteSpecificationController = new DeleteSpecificationController()
+
+specificationsRouter.post('/', createSpecificationController.handle)
+specificationsRouter.get('/', findAllSpecificationsController.handle)
+specificationsRouter.get('/:id', findSpecificationController.handle)
+specificationsRouter.put('/:id', updateSpecificationController.handle)
+specificationsRouter.delete('/:id', deleteSpecificationController.handle)
 
 export { specificationsRouter }

@@ -1,11 +1,16 @@
 import fs from 'fs'
 import { parse } from 'csv-parse'
+import { inject, injectable } from 'tsyringe'
 
 import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 import type { Category } from '../../entities/Category'
 
+@injectable()
 export class ImportCategoriesUseCase {
-  constructor(private categoriesRepository: CategoriesRepositoryInterface) {}
+  constructor(
+    @inject('CategoriesRepository')
+    private categoriesRepository: CategoriesRepositoryInterface
+  ) {}
 
   async execute(file?: Express.Multer.File) {
     if (!file) {

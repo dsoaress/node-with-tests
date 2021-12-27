@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import express from 'express'
 
 import './database'
+import './shared/container'
 import { env } from './config/env'
 import { router } from './routes'
 
