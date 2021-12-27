@@ -3,8 +3,10 @@ import { CategoriesRepository } from '../../repositories/implementations/Categor
 import { FindCategoryController } from './FindCategoryController'
 import { FindCategoryUseCase } from './FindCategoryUseCase'
 
-const categoriesRepository = CategoriesRepository.getInstance()
-const findCategoryUseCase = new FindCategoryUseCase(categoriesRepository)
-const findCategoryController = new FindCategoryController(findCategoryUseCase)
+export default () => {
+  const categoriesRepository = new CategoriesRepository()
+  const findCategoryUseCase = new FindCategoryUseCase(categoriesRepository)
+  const findCategoryController = new FindCategoryController(findCategoryUseCase)
 
-export { findCategoryController }
+  return findCategoryController
+}

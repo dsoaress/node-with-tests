@@ -1,4 +1,6 @@
-import { Specification } from '../../models/Specification'
+import { getRepository, Repository } from 'typeorm'
+
+import { Specification } from '../../entities/Specification'
 
 import type { SpecificationsRepositoryInterface } from '../SpecificationsRepositoryInterface'
 
@@ -9,60 +11,40 @@ export type CreateSpecificationDTO = {
 
 export type UpdateSpecificationDTO = Partial<CreateSpecificationDTO>
 export class SpecificationsRepository implements SpecificationsRepositoryInterface {
-  private specifications: Specification[]
-  private static instance: SpecificationsRepository
+  private repository: Repository<Specification>
 
-  private constructor() {
-    this.specifications = []
-  }
-
-  static getInstance() {
-    if (!SpecificationsRepository.instance) {
-      SpecificationsRepository.instance = new SpecificationsRepository()
-    }
-
-    return SpecificationsRepository.instance
+  constructor() {
+    this.repository = getRepository(Specification)
   }
 
   async create({ name, description }: CreateSpecificationDTO) {
-    const newSpecification = new Specification()
-
-    Object.assign(newSpecification, {
-      name,
-      description,
-      created_at: new Date()
-    })
-
-    this.specifications.push(newSpecification)
-
-    return newSpecification
+    const specification = this.repository.create({ name, description })
+    await this.repository.save(specification)
+    return specification
   }
 
   async findAll() {
-    return this.specifications
+    return await this.repository.find()
   }
 
   async findById(id: string) {
-    return this.specifications.find(specification => specification.id === id)
+    return await this.repository.findOne(id)
   }
 
   async findByName(name: string) {
-    return this.specifications.find(specification => specification.name === name)
+    return await this.repository.findOne({ name })
   }
 
-  async update(id: string, { name, description }: UpdateSpecificationDTO) {
+  async update(id: string, data: UpdateSpecificationDTO) {
     const specification = await this.findById(id)
 
     if (!specification) {
       return null
     }
 
-    Object.assign(specification, {
-      name: name || specification.name,
-      description: description || specification.description
-    })
-
-    return specification
+    const updatedSpecification = { ...specification, ...data }
+    await this.repository.save(updatedSpecification)
+    return updatedSpecification
   }
 
   async delete(id: string) {
@@ -72,8 +54,6 @@ export class SpecificationsRepository implements SpecificationsRepositoryInterfa
       return null
     }
 
-    const index = this.specifications.indexOf(specification)
-
-    this.specifications.splice(index, 1)
+    await this.repository.remove(specification)
   }
 }

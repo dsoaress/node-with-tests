@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import type { Specification } from '../../models/Specification'
+import type { Specification } from '../../entities/Specification'
 import type { FindAllSpecificationsUseCase } from './FindAllSpecificationsUseCase'
 
 export class FindAllSpecificationsController {

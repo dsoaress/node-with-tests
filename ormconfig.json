@@ -1,0 +1,9 @@
+{
+  "type": "postgres",
+  "url": "postgres://postgres@localhost:5432/rent_cars_api",
+  "migrations": ["src/database/migrations/*.ts"],
+  "entities": ["src/**/entities/**/*.ts"],
+  "cli": {
+    "migrationsDir": "src/database/migrations"
+  }
+}

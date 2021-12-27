@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import type { Category } from '../../models/Category'
+import type { Category } from '../../entities/Category'
 import type { FindCategoryUseCase } from './FindCategoryUseCase'
 
 export class FindCategoryController {

@@ -3,8 +3,10 @@ import { SpecificationsRepository } from '../../repositories/implementations/Spe
 import { FindSpecificationController } from './FindSpecificationController'
 import { FindSpecificationUseCase } from './FindSpecificationUseCase'
 
-const specificationsRepository = SpecificationsRepository.getInstance()
-const findSpecificationUseCase = new FindSpecificationUseCase(specificationsRepository)
-const findSpecificationController = new FindSpecificationController(findSpecificationUseCase)
+export default () => {
+  const specificationsRepository = new SpecificationsRepository()
+  const findSpecificationUseCase = new FindSpecificationUseCase(specificationsRepository)
+  const findSpecificationController = new FindSpecificationController(findSpecificationUseCase)
 
-export { findSpecificationController }
+  return findSpecificationController
+}

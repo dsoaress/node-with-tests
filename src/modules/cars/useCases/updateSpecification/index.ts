@@ -3,8 +3,12 @@ import { SpecificationsRepository } from '../../repositories/implementations/Spe
 import { UpdateSpecificationController } from './UpdateSpecificationController'
 import { UpdateSpecificationUseCase } from './UpdateSpecificationUseCase'
 
-const specificationsRepository = SpecificationsRepository.getInstance()
-const updateSpecificationUseCase = new UpdateSpecificationUseCase(specificationsRepository)
-const updateSpecificationController = new UpdateSpecificationController(updateSpecificationUseCase)
+export default () => {
+  const specificationsRepository = new SpecificationsRepository()
+  const updateSpecificationUseCase = new UpdateSpecificationUseCase(specificationsRepository)
+  const updateSpecificationController = new UpdateSpecificationController(
+    updateSpecificationUseCase
+  )
 
-export { updateSpecificationController }
+  return updateSpecificationController
+}

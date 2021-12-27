@@ -1,4 +1,6 @@
-import { Category } from '../../models/Category'
+import { getRepository, Repository } from 'typeorm'
+
+import { Category } from '../../entities/Category'
 
 import type { CategoriesRepositoryInterface } from '../CategoriesRepositoryInterface'
 
@@ -10,60 +12,40 @@ export type CreateCategoryDTO = {
 export type UpdateCategoryDTO = Partial<CreateCategoryDTO>
 
 export class CategoriesRepository implements CategoriesRepositoryInterface {
-  private categories: Category[]
-  private static instance: CategoriesRepository
+  private repository: Repository<Category>
 
-  private constructor() {
-    this.categories = []
-  }
-
-  static getInstance() {
-    if (!CategoriesRepository.instance) {
-      CategoriesRepository.instance = new CategoriesRepository()
-    }
-
-    return CategoriesRepository.instance
+  constructor() {
+    this.repository = getRepository(Category)
   }
 
   async create({ name, description }: CreateCategoryDTO) {
-    const newCategory = new Category()
-
-    Object.assign(newCategory, {
-      name,
-      description,
-      created_at: new Date()
-    })
-
-    this.categories.push(newCategory)
-
-    return newCategory
+    const category = this.repository.create({ name, description })
+    await this.repository.save(category)
+    return category
   }
 
   async findAll() {
-    return this.categories
+    return await this.repository.find()
   }
 
   async findById(id: string) {
-    return this.categories.find(category => category.id === id)
+    return await this.repository.findOne(id)
   }
 
   async findByName(name: string) {
-    return this.categories.find(category => category.name === name)
+    return await this.repository.findOne({ name })
   }
 
-  async update(id: string, { name, description }: UpdateCategoryDTO) {
+  async update(id: string, data: UpdateCategoryDTO) {
     const category = await this.findById(id)
 
     if (!category) {
       return null
     }
 
-    Object.assign(category, {
-      name: name || category.name,
-      description: description || category.description
-    })
-
-    return category
+    const updatedCategory = { ...category, ...data }
+    await this.repository.save(updatedCategory)
+    return updatedCategory
   }
 
   async delete(id: string) {
@@ -73,8 +55,6 @@ export class CategoriesRepository implements CategoriesRepositoryInterface {
       return null
     }
 
-    const index = this.categories.indexOf(category)
-
-    this.categories.splice(index, 1)
+    await this.repository.remove(category)
   }
 }

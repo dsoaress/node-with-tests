@@ -3,8 +3,12 @@ import { SpecificationsRepository } from '../../repositories/implementations/Spe
 import { DeleteSpecificationController } from './DeleteSpecificationController'
 import { DeleteSpecificationUseCase } from './DeleteSpecificationUseCase'
 
-const specificationsRepository = SpecificationsRepository.getInstance()
-const deleteSpecificationUseCase = new DeleteSpecificationUseCase(specificationsRepository)
-const deleteSpecificationController = new DeleteSpecificationController(deleteSpecificationUseCase)
+export default () => {
+  const specificationsRepository = new SpecificationsRepository()
+  const deleteSpecificationUseCase = new DeleteSpecificationUseCase(specificationsRepository)
+  const deleteSpecificationController = new DeleteSpecificationController(
+    deleteSpecificationUseCase
+  )
 
-export { deleteSpecificationController }
+  return deleteSpecificationController
+}

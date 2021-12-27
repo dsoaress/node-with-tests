@@ -3,7 +3,7 @@ import {
   UpdateSpecificationDTO
 } from './implementations/SpecificationsRepository'
 
-import type { Specification } from '../models/Specification'
+import type { Specification } from '../entities/Specification'
 
 export interface SpecificationsRepositoryInterface {
   create({ name, description }: CreateSpecificationDTO): Promise<Specification>

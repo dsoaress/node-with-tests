@@ -1,6 +1,6 @@
 import { CreateCategoryDTO, UpdateCategoryDTO } from './implementations/CategoriesRepository'
 
-import type { Category } from '../models/Category'
+import type { Category } from '../entities/Category'
 
 export interface CategoriesRepositoryInterface {
   create({ name, description }: CreateCategoryDTO): Promise<Category>

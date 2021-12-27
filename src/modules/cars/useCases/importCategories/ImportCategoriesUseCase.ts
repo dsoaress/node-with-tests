@@ -2,7 +2,7 @@ import fs from 'fs'
 import { parse } from 'csv-parse'
 
 import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
-import type { Category } from '../../models/Category'
+import type { Category } from '../../entities/Category'
 
 export class ImportCategoriesUseCase {
   constructor(private categoriesRepository: CategoriesRepositoryInterface) {}
