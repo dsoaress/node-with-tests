@@ -8,5 +8,273 @@
       "name": "Daniel Soares",
       "email": "daniel.soares@me.com"
     }
+  },
+  "paths": {
+    "/categories": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Create a new category",
+        "description": "Create a new car category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Sedan"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "A sedan is a car that is designed to carry a large number of people."
+                  }
+                },
+                "required": ["name", "description"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category created"
+          },
+          "400": {
+            "description": "Category already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Category"],
+        "summary": "Get all categories",
+        "description": "Get all categories",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "ckxo4bl440000eoqo9ci7doso"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Sedan"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "A sedan is a car that is designed to carry a large number of people."
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-01-01T00:00:00.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/:id": {
+      "get": {
+        "tags": ["Category"],
+        "summary": "Get a category",
+        "description": "Get a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Sedan"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "A sedan is a car that is designed to carry a large number of people."
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2020-01-01T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Category"],
+        "summary": "Update a category",
+        "description": "Update a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Sedan"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "A sedan is a car that is designed to carry a large number of people."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category updated"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Category"],
+        "summary": "Delete a category",
+        "description": "Delete a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Category deleted"
+          }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": ["Specification"],
+        "summary": "Create a new specification",
+        "description": "Create a new car specification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Doors"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "The number of doors on the car"
+                  }
+                },
+                "required": ["name", "description"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Specification created"
+          },
+          "400": {
+            "description": "Specification already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Specification"],
+        "summary": "Get all specifications",
+        "description": "Get all specifications",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "ckxo4bl440000eoqo9ci7doso"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Doors"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "The number of doors on the car"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-01-01T00:00:00.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specifications/:id": {
+      
+    }
   }
 }
