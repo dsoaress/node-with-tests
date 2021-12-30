@@ -1,15 +1,13 @@
 import { getRepository, Repository } from 'typeorm'
+import { validate } from 'class-validator'
 
 import { Specification } from '../../entities/Specification'
+import { AppError } from '../../../../shared/errors/AppError'
 
+import type { CreateSpecificationDTO } from '../../dto/CreateSpecificationDTO'
+import type { UpdateSpecificationDTO } from '../../dto/UpdateSpecificationDTO'
 import type { SpecificationsRepositoryInterface } from '../SpecificationsRepositoryInterface'
 
-export type CreateSpecificationDTO = {
-  name: string
-  description: string
-}
-
-export type UpdateSpecificationDTO = Partial<CreateSpecificationDTO>
 export class SpecificationsRepository implements SpecificationsRepositoryInterface {
   private repository: Repository<Specification>
 
@@ -19,6 +17,12 @@ export class SpecificationsRepository implements SpecificationsRepositoryInterfa
 
   async create({ name, description }: CreateSpecificationDTO) {
     const specification = this.repository.create({ name, description })
+    const errors = await validate(specification)
+
+    if (errors.length) {
+      throw new AppError(errors)
+    }
+
     await this.repository.save(specification)
     return specification
   }

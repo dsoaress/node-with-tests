@@ -1,7 +1,8 @@
 import { inject, injectable } from 'tsyringe'
 
-import { UpdateSpecificationDTO } from '../../repositories/implementations/SpecificationsRepository'
+import { AppError } from '../../../../shared/errors/AppError'
 
+import type { UpdateSpecificationDTO } from '../../dto/UpdateSpecificationDTO'
 import type { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
 
 @injectable()
@@ -15,7 +16,7 @@ export class UpdateSpecificationUseCase {
     const specification = await this.specificationsRepository.update(id, { name, description })
 
     if (!specification) {
-      throw new Error('Specification not found')
+      throw new AppError('Specification not found')
     }
 
     return specification

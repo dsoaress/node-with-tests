@@ -1,5 +1,5 @@
-import { CreateCategoryDTO, UpdateCategoryDTO } from './implementations/CategoriesRepository'
-
+import type { CreateCategoryDTO } from '../dto/CreateCategoryDTO'
+import type { UpdateCategoryDTO } from '../dto/UpdateCategoryDTO'
 import type { Category } from '../entities/Category'
 
 export interface CategoriesRepositoryInterface {

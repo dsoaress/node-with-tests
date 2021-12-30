@@ -1,15 +1,12 @@
 import { getRepository, Repository } from 'typeorm'
+import { validate } from 'class-validator'
 
 import { Category } from '../../entities/Category'
+import { AppError } from '../../../../shared/errors/AppError'
 
+import type { CreateCategoryDTO } from '../../dto/CreateCategoryDTO'
+import type { UpdateCategoryDTO } from '../../dto/UpdateCategoryDTO'
 import type { CategoriesRepositoryInterface } from '../CategoriesRepositoryInterface'
-
-export type CreateCategoryDTO = {
-  name: string
-  description: string
-}
-
-export type UpdateCategoryDTO = Partial<CreateCategoryDTO>
 
 export class CategoriesRepository implements CategoriesRepositoryInterface {
   private repository: Repository<Category>
@@ -20,6 +17,12 @@ export class CategoriesRepository implements CategoriesRepositoryInterface {
 
   async create({ name, description }: CreateCategoryDTO) {
     const category = this.repository.create({ name, description })
+    const errors = await validate(category)
+
+    if (errors.length) {
+      throw new AppError(errors)
+    }
+
     await this.repository.save(category)
     return category
   }

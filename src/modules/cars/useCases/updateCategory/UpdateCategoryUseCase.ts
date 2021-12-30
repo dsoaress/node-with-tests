@@ -1,7 +1,8 @@
 import { inject, injectable } from 'tsyringe'
 
-import { UpdateCategoryDTO } from '../../repositories/implementations/CategoriesRepository'
+import { AppError } from '../../../../shared/errors/AppError'
 
+import type { UpdateCategoryDTO } from '../../dto/UpdateCategoryDTO'
 import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 
 @injectable()
@@ -15,7 +16,7 @@ export class UpdateCategoryUseCase {
     const category = await this.categoriesRepository.update(id, { name, description })
 
     if (!category) {
-      throw new Error('Category not found')
+      throw new AppError('Category not found')
     }
 
     return category

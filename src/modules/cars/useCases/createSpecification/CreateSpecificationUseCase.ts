@@ -1,6 +1,8 @@
 import { inject, injectable } from 'tsyringe'
 
-import type { CreateSpecificationDTO } from '../../repositories/implementations/SpecificationsRepository'
+import { AppError } from '../../../../shared/errors/AppError'
+
+import type { CreateSpecificationDTO } from '../../dto/CreateSpecificationDTO'
 import type { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
 
 @injectable()
@@ -12,13 +14,13 @@ export class CreateSpecificationUseCase {
 
   async execute({ name, description }: CreateSpecificationDTO) {
     if (!name || !description) {
-      throw new Error('Name and description are required')
+      throw new AppError('Name and description are required')
     }
 
     const specificationExists = await this.specificationsRepository.findByName(name)
 
     if (specificationExists) {
-      throw new Error('Specification already exists')
+      throw new AppError('Specification already exists')
     }
 
     const specification = await this.specificationsRepository.create({ name, description })

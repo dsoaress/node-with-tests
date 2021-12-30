@@ -1,8 +1,5 @@
-import {
-  CreateSpecificationDTO,
-  UpdateSpecificationDTO
-} from './implementations/SpecificationsRepository'
-
+import type { CreateSpecificationDTO } from '../dto/CreateSpecificationDTO'
+import type { UpdateSpecificationDTO } from '../dto/UpdateSpecificationDTO'
 import type { Specification } from '../entities/Specification'
 
 export interface SpecificationsRepositoryInterface {

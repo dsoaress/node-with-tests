@@ -2,6 +2,8 @@ import fs from 'fs'
 import { parse } from 'csv-parse'
 import { inject, injectable } from 'tsyringe'
 
+import { AppError } from '../../../../shared/errors/AppError'
+
 import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 import type { Category } from '../../entities/Category'
 
@@ -14,7 +16,7 @@ export class ImportCategoriesUseCase {
 
   async execute(file?: Express.Multer.File) {
     if (!file) {
-      throw new Error('File not provided')
+      throw new AppError('File not provided')
     }
 
     const newCategories: Category[] = []
@@ -35,8 +37,8 @@ export class ImportCategoriesUseCase {
 
     await new Promise(resolve => parseFile.on('end', resolve))
 
-    fs.unlink(file.path, err => {
-      if (err) console.error(err)
+    fs.unlink(file.path, error => {
+      if (error) console.error(error)
     })
 
     return newCategories

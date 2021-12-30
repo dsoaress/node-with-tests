@@ -1,3 +1,4 @@
+import { IsNotEmpty, IsString } from 'class-validator'
 import cuid from 'cuid'
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 
@@ -7,9 +8,13 @@ export class Category {
   id?: string
 
   @Column()
+  @IsNotEmpty()
+  @IsString()
   name!: string
 
   @Column()
+  @IsNotEmpty()
+  @IsString()
   description!: string
 
   @CreateDateColumn()
