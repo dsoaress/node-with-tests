@@ -34,6 +34,10 @@ export class User {
   password!: string
 
   @Column()
+  @IsOptional()
+  avatar?: string
+
+  @Column()
   @IsNumber({
     allowNaN: false,
     allowInfinity: false,

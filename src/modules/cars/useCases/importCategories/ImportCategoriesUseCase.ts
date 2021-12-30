@@ -1,8 +1,9 @@
-import fs from 'fs'
+import { createReadStream } from 'fs'
 import { parse } from 'csv-parse'
 import { inject, injectable } from 'tsyringe'
 
 import { AppError } from '../../../../shared/errors/AppError'
+import { deleteFile } from '../../../../utils/file'
 
 import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 import type { Category } from '../../entities/Category'
@@ -20,7 +21,7 @@ export class ImportCategoriesUseCase {
     }
 
     const newCategories: Category[] = []
-    const stream = fs.createReadStream(file.path)
+    const stream = createReadStream(file.path)
     const parseFile = parse()
 
     stream.pipe(parseFile)
@@ -36,10 +37,7 @@ export class ImportCategoriesUseCase {
     })
 
     await new Promise(resolve => parseFile.on('end', resolve))
-
-    fs.unlink(file.path, error => {
-      if (error) console.error(error)
-    })
+    await deleteFile(file.filename)
 
     return newCategories
   }
