@@ -9,12 +9,14 @@ import { AppError } from '../shared/errors/AppError'
 import { categoriesRouter } from './categories.routes'
 import { specificationsRouter } from './specifications.routes'
 import { usersRouter } from './users.routes'
+import { authenticateRouter } from './authenticate.routes'
 
 import type { Request, NextFunction, Response } from 'express'
 
 const router = Router()
 
 router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+router.use('/authenticate', authenticateRouter)
 router.use('/categories', categoriesRouter)
 router.use('/specifications', specificationsRouter)
 router.use('/users', usersRouter)

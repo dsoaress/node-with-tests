@@ -9,7 +9,9 @@ import {
   Length
 } from 'class-validator'
 import cuid from 'cuid'
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm'
+
+import { Session } from './Session'
 
 @Entity('users')
 export class User {
@@ -43,6 +45,9 @@ export class User {
   @IsOptional()
   @IsBoolean()
   admin!: boolean
+
+  @OneToMany(() => Session, session => session.user)
+  sessions?: Session[]
 
   @CreateDateColumn()
   created_at?: Date

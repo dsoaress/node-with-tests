@@ -1,11 +1,14 @@
 import { container } from 'tsyringe'
 
+import { SessionsRepository } from '../../modules/accounts/repositories/implementations/SessionsRepository'
 import { UsersRepository } from '../../modules/accounts/repositories/implementations/UsersRepository'
-import { UsersRepositoryInterface } from '../../modules/accounts/repositories/UsersRepositoryInterface'
-import { CategoriesRepositoryInterface } from '../../modules/cars/repositories/CategoriesRepositoryInterface'
 import { CategoriesRepository } from '../../modules/cars/repositories/implementations/CategoriesRepository'
 import { SpecificationsRepository } from '../../modules/cars/repositories/implementations/SpecificationsRepository'
-import { SpecificationsRepositoryInterface } from '../../modules/cars/repositories/SpecificationsRepositoryInterface'
+
+import type { SessionsRepositoryInterface } from '../../modules/accounts/repositories/SessionsRepositoryInterface'
+import type { UsersRepositoryInterface } from '../../modules/accounts/repositories/UsersRepositoryInterface'
+import type { CategoriesRepositoryInterface } from '../../modules/cars/repositories/CategoriesRepositoryInterface'
+import type { SpecificationsRepositoryInterface } from '../../modules/cars/repositories/SpecificationsRepositoryInterface'
 
 container.registerSingleton<CategoriesRepositoryInterface>(
   'CategoriesRepository',
@@ -18,3 +21,5 @@ container.registerSingleton<SpecificationsRepositoryInterface>(
 )
 
 container.registerSingleton<UsersRepositoryInterface>('UsersRepository', UsersRepository)
+
+container.registerSingleton<SessionsRepositoryInterface>('SessionsRepository', SessionsRepository)

@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import multer from 'multer'
 
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { CreateCategoryController } from '../modules/cars/useCases/createCategory/CreateCategoryController'
 import { DeleteCategoryController } from '../modules/cars/useCases/deleteCategory/DeleteCategoryController'
 import { FindAllCategoriesController } from '../modules/cars/useCases/findAllCategories/FindAllCategoriesController'
@@ -19,6 +20,7 @@ const findCategoryController = new FindCategoryController()
 const updateCategoryController = new UpdateCategoryController()
 const deleteCategoryController = new DeleteCategoryController()
 
+categoriesRouter.use(ensureAuthenticated)
 categoriesRouter.post('/', createCategoryController.handle)
 categoriesRouter.post('/import', upload, importCategoriesController.handle)
 categoriesRouter.get('/', findAllCategoriesController.handle)

@@ -1,5 +1,6 @@
 import { Router } from 'express'
 
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { CreateUserController } from '../modules/accounts/useCases/createUser/CreateUserController'
 import { DeleteUserController } from '../modules/accounts/useCases/deleteUser/DeleteUserController'
 import { FindAllUsersController } from '../modules/accounts/useCases/findAllUsers/FindAllUsersController'
@@ -15,6 +16,7 @@ const updateUserController = new UpdateUserController()
 const deleteUserController = new DeleteUserController()
 
 usersRouter.post('/', createUserController.handle)
+usersRouter.use(ensureAuthenticated)
 usersRouter.get('/', findAllUsersController.handle)
 usersRouter.get('/:id', findUserController.handle)
 usersRouter.patch('/:id', updateUserController.handle)
