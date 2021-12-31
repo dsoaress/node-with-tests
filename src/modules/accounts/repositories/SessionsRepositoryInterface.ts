@@ -2,5 +2,7 @@ import type { Session } from '../entities/Session'
 import type { User } from '../entities/User'
 
 export interface SessionsRepositoryInterface {
-  create(user: User): Promise<Session>
+  createSession(user: User): Promise<Session>
+  findSession(id: string): Promise<Session | undefined>
+  deleteSession(id: string): Promise<void | null>
 }

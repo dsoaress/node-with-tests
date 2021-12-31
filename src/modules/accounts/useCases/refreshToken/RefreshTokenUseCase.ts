@@ -1,17 +1,15 @@
 import { instanceToPlain } from 'class-transformer'
-import { inject, injectable } from 'tsyringe'
-import { compareSync } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
+import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
 import { env } from '../../../../config/env'
+import { AppError } from '../../../../shared/errors/AppError'
 
-import type { AuthenticateUserDTO } from '../../dto/AuthenticateUserDTO'
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 import type { SessionsRepositoryInterface } from '../../repositories/SessionsRepositoryInterface'
+import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 
 @injectable()
-export class AuthenticateUserUseCase {
+export class RefreshTokenUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: UsersRepositoryInterface,
@@ -20,15 +18,30 @@ export class AuthenticateUserUseCase {
     private sessionsRepository: SessionsRepositoryInterface
   ) {}
 
-  async execute({ email, password }: AuthenticateUserDTO) {
-    const user = await this.usersRepository.findByEmail(email)
+  async execute(userId: string, refreshToken: string) {
+    if (!refreshToken) {
+      throw new AppError('Missing refresh token', 401)
+    }
+
+    const sessionExists = await this.sessionsRepository.findSession(refreshToken)
+
+    if (!sessionExists) {
+      throw new AppError('Invalid credentials', 401)
+    }
+
+    const user = await this.usersRepository.findById(userId)
 
     if (!user) {
       throw new AppError('Invalid credentials', 401)
     }
 
-    if (!compareSync(password, user.password)) {
+    if (sessionExists.user.id !== user.id) {
       throw new AppError('Invalid credentials', 401)
+    }
+
+    if (sessionExists.created_at.getTime() > Date.now()) {
+      await this.sessionsRepository.deleteSession(refreshToken)
+      throw new AppError('Session expired', 401)
     }
 
     const session = await this.sessionsRepository.createSession(user)
