@@ -39,7 +39,7 @@ export class RefreshTokenUseCase {
       throw new AppError('Invalid credentials', 401)
     }
 
-    if (sessionExists.created_at.getTime() > Date.now()) {
+    if (sessionExists.createdAt.getTime() > Date.now()) {
       await this.sessionsRepository.deleteSession(refreshToken)
       throw new AppError('Session expired', 401)
     }
@@ -58,7 +58,7 @@ export class RefreshTokenUseCase {
     return {
       ...instanceToPlain(user),
       token,
-      refresh_token: session.id
+      refreshToken: session.id
     }
   }
 }

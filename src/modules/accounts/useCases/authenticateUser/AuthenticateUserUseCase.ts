@@ -45,7 +45,7 @@ export class AuthenticateUserUseCase {
     return {
       ...instanceToPlain(user),
       token,
-      refresh_token: session.id
+      refreshToken: session.id
     }
   }
 }

@@ -6,17 +6,17 @@ import { User } from './User'
 @Entity('sessions')
 export class Session {
   @PrimaryColumn()
-  id?: string
+  id!: string
 
-  @ManyToOne(() => User, user => user.sessions, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => User, user => user.sessions)
+  @JoinColumn({ name: 'userId' })
   user!: User
 
   @Column()
-  expires_at!: Date
+  expiresAt!: Date
 
   @CreateDateColumn()
-  created_at!: Date
+  createdAt!: Date
 
   constructor() {
     if (!this.id) {

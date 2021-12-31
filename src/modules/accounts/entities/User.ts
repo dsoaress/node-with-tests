@@ -1,14 +1,21 @@
 import { Exclude } from 'class-transformer'
 import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import cuid from 'cuid'
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  UpdateDateColumn
+} from 'typeorm'
 
 import { Session } from './Session'
 
 @Entity('users')
 export class User {
   @PrimaryColumn()
-  id?: string
+  id!: string
 
   @Column()
   @IsNotEmpty()
@@ -31,7 +38,7 @@ export class User {
 
   @Column()
   @IsString()
-  driver_license!: string
+  driverLicense!: string
 
   @Column({ default: false })
   @IsOptional()
@@ -42,7 +49,10 @@ export class User {
   sessions?: Session[]
 
   @CreateDateColumn()
-  created_at?: Date
+  createdAt!: Date
+
+  @UpdateDateColumn()
+  updatedAt?: Date
 
   constructor() {
     if (!this.id) {

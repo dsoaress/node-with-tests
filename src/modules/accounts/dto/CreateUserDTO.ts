@@ -3,6 +3,6 @@ export type CreateUserDTO = {
   email: string
   password: string
   avatar?: string
-  driver_license: string
+  driverLicense: string
   admin?: boolean
 }

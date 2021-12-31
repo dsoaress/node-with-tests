@@ -1,11 +1,11 @@
 import { IsNotEmpty, IsString } from 'class-validator'
 import cuid from 'cuid'
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('specifications')
 export class Specification {
   @PrimaryColumn()
-  id?: string
+  id!: string
 
   @Column()
   @IsNotEmpty()
@@ -18,7 +18,10 @@ export class Specification {
   description!: string
 
   @CreateDateColumn()
-  created_at?: Date
+  createdAt!: Date
+
+  @UpdateDateColumn()
+  updatedAt?: Date
 
   constructor() {
     if (!this.id) {

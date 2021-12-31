@@ -10,7 +10,7 @@ export class AuthenticateUserController {
   async handle(
     req: Request,
     res: Response
-  ): Promise<Response<User & { token: string; refresh_token: string }>> {
+  ): Promise<Response<User & { token: string; refreshToken: string }>> {
     const { email, password } = req.body as AuthenticateUserDTO
     const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase)
     const result = await authenticateUserUseCase.execute({ email, password })

@@ -17,7 +17,7 @@ export class SessionsRepository implements SessionsRepositoryInterface {
   async createSession(user: User) {
     const session = this.repository.create({
       user,
-      expires_at: new Date(Date.now() + +env.REFRESH_TOKEN_EXPIRES_AT)
+      expiresAt: new Date(Date.now() + +env.REFRESH_TOKEN_EXPIRES_AT)
     })
 
     await this.repository.save(session)
