@@ -1,37 +1,35 @@
-import { getRepository, Repository } from 'typeorm'
 import { hashSync } from 'bcrypt'
 
 import { User } from '../../entities/User'
 
-import type { UsersRepositoryInterface } from '../UsersRepositoryInterface'
 import type { CreateUserDTO } from '../../dto/CreateUserDTO'
 import type { UpdateUserDTO } from '../../dto/UpdateUserDTO'
+import type { UsersRepositoryInterface } from '../UsersRepositoryInterface'
 
 export class UsersRepository implements UsersRepositoryInterface {
-  private repository: Repository<User>
-
-  constructor() {
-    this.repository = getRepository(User)
-  }
+  users: User[] = []
 
   async create(data: CreateUserDTO) {
-    const user = this.repository.create(data)
+    const user = new User()
 
-    user.password = hashSync(data.password, 10)
-    await this.repository.save(user)
+    data.password = hashSync(data.password, 10)
+    Object.assign(user, data)
+
+    this.users.push(user)
+
     return user
   }
 
   async findAll() {
-    return await this.repository.find()
+    return this.users
   }
 
   async findById(id: string) {
-    return await this.repository.findOne(id)
+    return this.users.find(user => user.id === id)
   }
 
   async findByEmail(email: string) {
-    return await this.repository.findOne({ email })
+    return this.users.find(user => user.email === email)
   }
 
   async update(id: string, data: UpdateUserDTO) {
@@ -42,7 +40,7 @@ export class UsersRepository implements UsersRepositoryInterface {
     }
 
     const updatedUser = { ...user, ...data }
-    await this.repository.save(updatedUser)
+
     return updatedUser
   }
 
@@ -53,6 +51,6 @@ export class UsersRepository implements UsersRepositoryInterface {
       return null
     }
 
-    await this.repository.remove(user)
+    this.users = this.users.filter(user => user.id !== id)
   }
 }

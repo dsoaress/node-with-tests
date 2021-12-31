@@ -37,6 +37,7 @@ export class User {
   avatar?: string
 
   @Column()
+  @IsNotEmpty()
   @IsString()
   driverLicense!: string
 
