@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
+import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
 
 @injectable()
 export class DeleteCategoryUseCase {

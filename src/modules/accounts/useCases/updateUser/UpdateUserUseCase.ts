@@ -1,8 +1,8 @@
-import { inject, injectable } from 'tsyringe'
 import { instanceToPlain } from 'class-transformer'
+import { inject, injectable } from 'tsyringe'
 
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
-import type { UpdateUserDTO } from '../../dto/UpdateUserDTO'
+import { UpdateUserDTO } from '@/accounts/dto/UpdateUserDTO'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
 
 @injectable()
 export class UpdateUserUseCase {

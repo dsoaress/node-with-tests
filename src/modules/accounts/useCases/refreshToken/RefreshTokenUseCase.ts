@@ -2,11 +2,11 @@ import { instanceToPlain } from 'class-transformer'
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
-import { env } from '../../../../config/env'
-import { AppError } from '../../../../shared/errors/AppError'
-
-import type { SessionsRepositoryInterface } from '../../repositories/SessionsRepositoryInterface'
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
+import { Session } from '@/accounts/models/Session'
+import { SessionsRepositoryInterface } from '@/accounts/repositories/SessionsRepositoryInterface'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { env } from '@/config/env'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class RefreshTokenUseCase {
@@ -39,12 +39,15 @@ export class RefreshTokenUseCase {
       throw new AppError('Invalid credentials', 401)
     }
 
-    if (sessionExists.createdAt.getTime() > Date.now()) {
-      await this.sessionsRepository.deleteSession(refreshToken)
+    const isExpired = sessionExists.expiresAt.getTime() > Date.now()
+    await this.sessionsRepository.deleteSession(refreshToken)
+
+    if (isExpired) {
       throw new AppError('Session expired', 401)
     }
 
-    const session = await this.sessionsRepository.createSession(user)
+    const session = new Session(user)
+    await this.sessionsRepository.createSession(session)
 
     const jwtPayload = {
       sub: user.id,

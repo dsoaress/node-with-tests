@@ -1,8 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-
-import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
+import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class FindCategoryUseCase {

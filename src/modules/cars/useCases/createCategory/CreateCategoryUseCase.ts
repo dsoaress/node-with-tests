@@ -1,9 +1,10 @@
+import { validate } from 'class-validator'
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-
-import type { CreateCategoryDTO } from '../../dto/CreateCategoryDTO'
-import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
+import { CreateCategoryDTO } from '@/cars/dto/CreateCategoryDTO'
+import { Category } from '@/cars/models/Category'
+import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class CreateCategoryUseCase {
@@ -12,19 +13,14 @@ export class CreateCategoryUseCase {
     private categoriesRepository: CategoriesRepositoryInterface
   ) {}
 
-  async execute({ name, description }: CreateCategoryDTO) {
-    if (!name || !description) {
-      throw new AppError('Name and description are required')
-    }
+  async execute(data: CreateCategoryDTO) {
+    const categoryExists = await this.categoriesRepository.findByName(data.name)
+    if (categoryExists) throw new AppError('Category already exists')
 
-    const categoryExists = await this.categoriesRepository.findByName(name)
+    const category = new Category(data)
+    const errors = await validate(category)
+    if (errors.length) throw new AppError(errors)
 
-    if (categoryExists) {
-      throw new AppError('Category already exists')
-    }
-
-    const category = await this.categoriesRepository.create({ name, description })
-
-    return category
+    return await this.categoriesRepository.create(category)
   }
 }

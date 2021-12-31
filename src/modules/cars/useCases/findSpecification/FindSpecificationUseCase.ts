@@ -1,8 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-
-import type { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
+import { SpecificationsRepositoryInterface } from '@/cars/repositories/SpecificationsRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class FindSpecificationUseCase {

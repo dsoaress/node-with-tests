@@ -1,14 +1,14 @@
-import { instanceToPlain } from 'class-transformer'
-import { inject, injectable } from 'tsyringe'
 import { compareSync } from 'bcrypt'
+import { instanceToPlain } from 'class-transformer'
 import { sign } from 'jsonwebtoken'
+import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-import { env } from '../../../../config/env'
-
-import type { AuthenticateUserDTO } from '../../dto/AuthenticateUserDTO'
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
-import type { SessionsRepositoryInterface } from '../../repositories/SessionsRepositoryInterface'
+import { AuthenticateUserDTO } from '@/accounts/dto/AuthenticateUserDTO'
+import { Session } from '@/accounts/models/Session'
+import { SessionsRepositoryInterface } from '@/accounts/repositories/SessionsRepositoryInterface'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { env } from '@/config/env'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class AuthenticateUserUseCase {
@@ -31,7 +31,8 @@ export class AuthenticateUserUseCase {
       throw new AppError('Invalid credentials', 401)
     }
 
-    const session = await this.sessionsRepository.createSession(user)
+    const session = new Session(user)
+    await this.sessionsRepository.createSession(session)
 
     const jwtPayload = {
       sub: user.id,

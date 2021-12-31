@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
 
 @injectable()
 export class DeleteUserUseCase {

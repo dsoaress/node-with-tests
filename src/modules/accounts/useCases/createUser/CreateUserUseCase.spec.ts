@@ -1,10 +1,11 @@
-import { UsersRepository } from '../../repositories/inMemory/UsersRepository'
-import { AppError } from '../../../../shared/errors/AppError'
+import 'reflect-metadata'
+
+import { CreateUserDTO } from '@/accounts/dto/CreateUserDTO'
+import { UsersRepository } from '@/accounts/infra/inMemory/repositories/UsersRepository'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 import { CreateUserUseCase } from './CreateUserUseCase'
-
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
-import type { CreateUserDTO } from '../../dto/CreateUserDTO'
 
 let createUserUseCase: CreateUserUseCase
 let usersRepository: UsersRepositoryInterface

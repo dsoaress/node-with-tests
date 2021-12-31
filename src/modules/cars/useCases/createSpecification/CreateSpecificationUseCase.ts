@@ -1,9 +1,10 @@
+import { validate } from 'class-validator'
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-
-import type { CreateSpecificationDTO } from '../../dto/CreateSpecificationDTO'
-import type { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
+import { CreateSpecificationDTO } from '@/cars/dto/CreateSpecificationDTO'
+import { Specification } from '@/cars/models/Specification'
+import { SpecificationsRepositoryInterface } from '@/cars/repositories/SpecificationsRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class CreateSpecificationUseCase {
@@ -12,19 +13,15 @@ export class CreateSpecificationUseCase {
     private specificationsRepository: SpecificationsRepositoryInterface
   ) {}
 
-  async execute({ name, description }: CreateSpecificationDTO) {
-    if (!name || !description) {
-      throw new AppError('Name and description are required')
-    }
+  async execute(data: CreateSpecificationDTO) {
+    const specificationExists = await this.specificationsRepository.findByName(data.name)
 
-    const specificationExists = await this.specificationsRepository.findByName(name)
+    if (specificationExists) throw new AppError('Specification already exists')
 
-    if (specificationExists) {
-      throw new AppError('Specification already exists')
-    }
+    const specification = new Specification(data)
+    const errors = await validate(specification)
+    if (errors.length) throw new AppError(errors)
 
-    const specification = await this.specificationsRepository.create({ name, description })
-
-    return specification
+    return await this.specificationsRepository.create(specification)
   }
 }

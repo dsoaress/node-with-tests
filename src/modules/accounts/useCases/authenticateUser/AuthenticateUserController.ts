@@ -1,19 +1,12 @@
+import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
 
-import type { Request, Response } from 'express'
-import type { User } from '../../entities/User'
-import type { AuthenticateUserDTO } from '../../dto/AuthenticateUserDTO'
-
 export class AuthenticateUserController {
-  async handle(
-    req: Request,
-    res: Response
-  ): Promise<Response<User & { token: string; refreshToken: string }>> {
-    const { email, password } = req.body as AuthenticateUserDTO
+  async handle(req: Request, res: Response) {
     const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase)
-    const result = await authenticateUserUseCase.execute({ email, password })
+    const result = await authenticateUserUseCase.execute(req.body)
     return res.json(result)
   }
 }

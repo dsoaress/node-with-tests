@@ -1,10 +1,9 @@
 import { instanceToPlain } from 'class-transformer'
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-import { deleteFile } from '../../../../utils/file'
-
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
+import { deleteFile } from '@/utils/file'
 
 @injectable()
 export class UpdateUserAvatarUseCase {
@@ -29,6 +28,7 @@ export class UpdateUserAvatarUseCase {
     }
 
     const updatedUser = await this.usersRepository.update(userId, {
+      ...user,
       avatar: avatarFilename
     })
 

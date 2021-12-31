@@ -1,14 +1,12 @@
+import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { UpdateUserUseCase } from './UpdateUserUseCase'
 
-import type { Request, Response } from 'express'
-import type { User } from '../../entities/User'
-
 export class UpdateUserController {
-  async handle(req: Request, res: Response): Promise<Response<User>> {
+  async handle(req: Request, res: Response) {
     const updateUserUseCase = container.resolve(UpdateUserUseCase)
-    const user = await updateUserUseCase.execute(req.params.id, req.body)
-    return res.json(user)
+    const result = await updateUserUseCase.execute(req.params.id, req.body)
+    return res.json(result)
   }
 }

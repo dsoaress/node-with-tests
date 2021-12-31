@@ -1,10 +1,11 @@
-import { CategoriesRepository } from '../../repositories/inMemory/CategoriesRepository'
-import { AppError } from '../../../../shared/errors/AppError'
+import 'reflect-metadata'
+
+import { CreateCategoryDTO } from '@/cars/dto/CreateCategoryDTO'
+import { CategoriesRepository } from '@/cars/infra/inMemory/repositories/CategoriesRepository'
+import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 import { CreateCategoryUseCase } from './CreateCategoryUseCase'
-
-import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
-import type { CreateCategoryDTO } from '../../dto/CreateCategoryDTO'
 
 let createCategoryUseCase: CreateCategoryUseCase
 let categoriesRepository: CategoriesRepositoryInterface

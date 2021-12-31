@@ -1,12 +1,10 @@
-import type { CreateCategoryDTO } from '../dto/CreateCategoryDTO'
-import type { UpdateCategoryDTO } from '../dto/UpdateCategoryDTO'
-import type { Category } from '../entities/Category'
+import { Category } from '../models/Category'
 
 export interface CategoriesRepositoryInterface {
-  create({ name, description }: CreateCategoryDTO): Promise<Category>
+  create(data: Category): Promise<Category>
   findAll(): Promise<Category[]>
   findById(id: string): Promise<Category | undefined>
   findByName(name: string): Promise<Category | undefined>
-  update(id: string, { name, description }: UpdateCategoryDTO): Promise<Category | null>
-  delete(id: string): Promise<void | null>
+  update(id: string, data: Partial<Category>): Promise<Category | undefined>
+  delete(id: string): Promise<void>
 }

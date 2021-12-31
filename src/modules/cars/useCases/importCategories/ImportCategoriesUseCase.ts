@@ -1,12 +1,11 @@
-import { createReadStream } from 'fs'
 import { parse } from 'csv-parse'
+import { createReadStream } from 'fs'
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-import { deleteFile } from '../../../../utils/file'
-
-import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
-import type { Category } from '../../entities/Category'
+import { Category } from '@/cars/models/Category'
+import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
+import { deleteFile } from '@/utils/file'
 
 @injectable()
 export class ImportCategoriesUseCase {
@@ -31,7 +30,8 @@ export class ImportCategoriesUseCase {
       const category = await this.categoriesRepository.findByName(name)
 
       if (!category) {
-        const newCategory = await this.categoriesRepository.create({ name, description })
+        const newCategory = new Category({ name, description })
+        await this.categoriesRepository.create(newCategory)
         newCategories.push(newCategory)
       }
     })

@@ -1,12 +1,12 @@
+import { hashSync } from 'bcrypt'
 import { instanceToPlain } from 'class-transformer'
 import { validate } from 'class-validator'
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-import { User } from '../../entities/User'
-
-import type { CreateUserDTO } from '../../dto/CreateUserDTO'
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
+import { CreateUserDTO } from '@/accounts/dto/CreateUserDTO'
+import { User } from '@/accounts/models/User'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class CreateUserUseCase {
@@ -17,22 +17,15 @@ export class CreateUserUseCase {
 
   async execute(data: CreateUserDTO) {
     const userExists = await this.usersRepository.findByEmail(data.email)
+    if (userExists) throw new AppError('User already exists')
 
-    if (userExists) {
-      throw new AppError('User already exists')
-    }
+    const user = new User(data)
+    const errors = await validate(user)
+    if (errors.length) throw new AppError(errors)
 
-    const validateUser = new User()
-    Object.assign(validateUser, data)
+    user.password = hashSync(user.password, 10)
+    const result = await this.usersRepository.create(user)
 
-    const errors = await validate(validateUser)
-
-    if (errors.length) {
-      throw new AppError(errors)
-    }
-
-    const user = await this.usersRepository.create(data)
-
-    return instanceToPlain(user)
+    return instanceToPlain(result)
   }
 }

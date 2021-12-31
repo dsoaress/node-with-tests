@@ -1,9 +1,8 @@
 import { inject, injectable } from 'tsyringe'
 
-import { AppError } from '../../../../shared/errors/AppError'
-
-import type { UpdateCategoryDTO } from '../../dto/UpdateCategoryDTO'
-import type { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
+import { UpdateCategoryDTO } from '@/cars/dto/UpdateCategoryDTO'
+import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
 
 @injectable()
 export class UpdateCategoryUseCase {

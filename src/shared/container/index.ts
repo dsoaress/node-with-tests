@@ -1,14 +1,13 @@
 import { container } from 'tsyringe'
 
-import { SessionsRepository } from '../../modules/accounts/repositories/implementations/SessionsRepository'
-import { UsersRepository } from '../../modules/accounts/repositories/implementations/UsersRepository'
-import { CategoriesRepository } from '../../modules/cars/repositories/implementations/CategoriesRepository'
-import { SpecificationsRepository } from '../../modules/cars/repositories/implementations/SpecificationsRepository'
-
-import type { SessionsRepositoryInterface } from '../../modules/accounts/repositories/SessionsRepositoryInterface'
-import type { UsersRepositoryInterface } from '../../modules/accounts/repositories/UsersRepositoryInterface'
-import type { CategoriesRepositoryInterface } from '../../modules/cars/repositories/CategoriesRepositoryInterface'
-import type { SpecificationsRepositoryInterface } from '../../modules/cars/repositories/SpecificationsRepositoryInterface'
+import { SessionsRepository } from '@/accounts/infra/typeorm/repositories/SessionsRepository'
+import { UsersRepository } from '@/accounts/infra/typeorm/repositories/UsersRepository'
+import { SessionsRepositoryInterface } from '@/accounts/repositories/SessionsRepositoryInterface'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { CategoriesRepository } from '@/cars/infra/typeorm/repositories/CategoriesRepository'
+import { SpecificationsRepository } from '@/cars/infra/typeorm/repositories/SpecificationsRepository'
+import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { SpecificationsRepositoryInterface } from '@/cars/repositories/SpecificationsRepositoryInterface'
 
 container.registerSingleton<CategoriesRepositoryInterface>(
   'CategoriesRepository',

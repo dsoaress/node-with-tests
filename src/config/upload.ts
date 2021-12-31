@@ -1,6 +1,6 @@
+import cuid from 'cuid'
 import multer, { diskStorage } from 'multer'
 import { resolve } from 'path'
-import cuid from 'cuid'
 
 const uploadConfig = multer({
   storage: diskStorage({

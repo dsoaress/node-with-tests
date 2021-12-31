@@ -1,14 +1,15 @@
-import { UsersRepository } from '../../repositories/inMemory/UsersRepository'
-import { AppError } from '../../../../shared/errors/AppError'
-import { SessionsRepository } from '../../repositories/inMemory/SessionsRepository'
+import 'reflect-metadata'
+
+import { AuthenticateUserDTO } from '@/accounts/dto/AuthenticateUserDTO'
+import { CreateUserDTO } from '@/accounts/dto/CreateUserDTO'
+import { SessionsRepository } from '@/accounts/infra/inMemory/repositories/SessionsRepository'
+import { UsersRepository } from '@/accounts/infra/inMemory/repositories/UsersRepository'
+import { SessionsRepositoryInterface } from '@/accounts/repositories/SessionsRepositoryInterface'
+import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { AppError } from '@/shared/errors/AppError'
+
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
-
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
-
-import type { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
-import type { SessionsRepositoryInterface } from '../../repositories/SessionsRepositoryInterface'
-import type { CreateUserDTO } from '../../dto/CreateUserDTO'
-import type { AuthenticateUserDTO } from '../../dto/AuthenticateUserDTO'
 
 let createUserUseCase: CreateUserUseCase
 let authenticateUserUseCase: AuthenticateUserUseCase

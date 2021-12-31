@@ -1,15 +1,10 @@
+import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
 import { RefreshTokenUseCase } from './RefreshTokenUseCase'
 
-import type { Request, Response } from 'express'
-import type { User } from '../../entities/User'
-
 export class RefreshTokenController {
-  async handle(
-    req: Request,
-    res: Response
-  ): Promise<Response<User & { token: string; refreshToken: string }>> {
+  async handle(req: Request, res: Response) {
     const { id } = req.user
     const { refreshToken } = req.body
     const refreshTokenUseCase = container.resolve(RefreshTokenUseCase)
