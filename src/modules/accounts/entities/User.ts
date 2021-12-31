@@ -1,13 +1,5 @@
 import { Exclude } from 'class-transformer'
-import {
-  IsBoolean,
-  IsEmail,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Length
-} from 'class-validator'
+import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import cuid from 'cuid'
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 
@@ -38,11 +30,7 @@ export class User {
   avatar?: string
 
   @Column()
-  @IsNumber({
-    allowNaN: false,
-    allowInfinity: false,
-    maxDecimalPlaces: 0
-  })
+  @IsString()
   driver_license!: string
 
   @Column({ default: false })
