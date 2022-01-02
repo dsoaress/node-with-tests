@@ -12,7 +12,7 @@ export class CreateSessions1640868602911 implements MigrationInterface {
             isPrimary: true
           },
           {
-            name: 'user_id',
+            name: 'userId',
             type: 'varchar',
             isNullable: false
           },
@@ -25,6 +25,16 @@ export class CreateSessions1640868602911 implements MigrationInterface {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'
+          }
+        ],
+        foreignKeys: [
+          {
+            name: 'SessionUser',
+            columnNames: ['userId'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'users',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
           }
         ]
       })

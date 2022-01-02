@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  UpdateDateColumn
+} from 'typeorm'
+
+import { CarEntity } from './CarEntity'
 
 @Entity('categories')
 export class CategoryEntity {
@@ -10,6 +19,9 @@ export class CategoryEntity {
 
   @Column()
   description!: string
+
+  @OneToMany(() => CarEntity, car => car.id)
+  cars?: CarEntity[]
 
   @CreateDateColumn()
   createdAt!: Date
