@@ -17,11 +17,13 @@ export class CarsRepository implements CarsRepositoryInterface {
   }
 
   async findAll() {
-    return await this.repository.find()
+    return await this.repository.find({ relations: ['category'] })
   }
 
   async findById(id: string) {
-    return await this.repository.findOne(id)
+    return await this.repository.findOne(id, {
+      relations: ['category']
+    })
   }
 
   async findByName(name: string) {
