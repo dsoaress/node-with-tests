@@ -44,5 +44,5 @@ export class CarEntity {
   createdAt!: Date
 
   @UpdateDateColumn()
-  updatedAt?: Date
+  updatedAt!: Date
 }

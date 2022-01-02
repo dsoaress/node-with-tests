@@ -38,12 +38,13 @@ export class Car {
 
   createdAt!: Date
 
-  updatedAt?: Date
+  updatedAt!: Date
 
   constructor(data: Partial<Car>) {
     if (!this.id) this.id = cuid()
     if (!this.available) this.available = true
     if (!this.createdAt) this.createdAt = new Date()
+    this.updatedAt = new Date()
 
     Object.assign(this, data)
   }

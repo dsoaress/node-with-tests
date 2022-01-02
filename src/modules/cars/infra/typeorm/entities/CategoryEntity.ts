@@ -27,5 +27,5 @@ export class CategoryEntity {
   createdAt!: Date
 
   @UpdateDateColumn()
-  updatedAt?: Date
+  updatedAt!: Date
 }

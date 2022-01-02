@@ -15,5 +15,5 @@ export class SpecificationEntity {
   createdAt!: Date
 
   @UpdateDateColumn()
-  updatedAt?: Date
+  updatedAt!: Date
 }

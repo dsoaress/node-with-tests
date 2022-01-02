@@ -41,5 +41,5 @@ export class UserEntity {
   createdAt!: Date
 
   @UpdateDateColumn()
-  updatedAt?: Date
+  updatedAt!: Date
 }

@@ -30,12 +30,13 @@ export class User {
 
   createdAt!: Date
 
-  updatedAt?: Date
+  updatedAt!: Date
 
   constructor(data: Partial<User>) {
     if (!this.id) this.id = cuid()
     if (!this.admin) this.admin = false
     if (!this.createdAt) this.createdAt = new Date()
+    this.updatedAt = new Date()
 
     Object.assign(this, data)
   }

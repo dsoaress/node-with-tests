@@ -14,11 +14,12 @@ export class Category {
 
   createdAt!: Date
 
-  updatedAt?: Date
+  updatedAt!: Date
 
   constructor(data: Partial<Category>) {
     if (!this.id) this.id = cuid()
     if (!this.createdAt) this.createdAt = new Date()
+    this.updatedAt = new Date()
 
     Object.assign(this, data)
   }
