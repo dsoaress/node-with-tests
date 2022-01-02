@@ -8,7 +8,9 @@ import { UpdateUserController } from '@/accounts/useCases/updateUser/UpdateUserC
 import { UpdateUserAvatarController } from '@/accounts/useCases/updateUserAvatar/UpdateUserAvatarController'
 import { upload } from '@/config/upload'
 
+import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
+import { ensureUser } from '../middlewares/ensureUser'
 
 const usersRouter = Router()
 
@@ -19,9 +21,12 @@ const updateUserController = new UpdateUserController()
 const updateUserAvatarController = new UpdateUserAvatarController()
 const deleteUserController = new DeleteUserController()
 
+// public route
 usersRouter.post('/', createUserController.handle)
-usersRouter.use(ensureAuthenticated)
-usersRouter.get('/', findAllUsersController.handle)
+
+// private routes
+usersRouter.use(ensureAuthenticated, ensureUser)
+usersRouter.get('/', ensureAdmin, findAllUsersController.handle)
 usersRouter.get('/:id', findUserController.handle)
 usersRouter.patch('/:id', updateUserController.handle)
 usersRouter.patch('/update-avatar/:id', upload, updateUserAvatarController.handle)

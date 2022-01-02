@@ -8,6 +8,7 @@ import { ImportCategoriesController } from '@/cars/useCases/importCategories/Imp
 import { UpdateCategoryController } from '@/cars/useCases/updateCategory/UpdateCategoryController'
 import { upload } from '@/config/upload'
 
+import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
 const categoriesRouter = Router()
@@ -19,11 +20,14 @@ const findCategoryController = new FindCategoryController()
 const updateCategoryController = new UpdateCategoryController()
 const deleteCategoryController = new DeleteCategoryController()
 
-categoriesRouter.use(ensureAuthenticated)
-categoriesRouter.post('/', createCategoryController.handle)
-categoriesRouter.post('/import', upload, importCategoriesController.handle)
+// public routes
 categoriesRouter.get('/', findAllCategoriesController.handle)
 categoriesRouter.get('/:id', findCategoryController.handle)
+
+// private routes
+categoriesRouter.use(ensureAuthenticated, ensureAdmin)
+categoriesRouter.post('/', createCategoryController.handle)
+categoriesRouter.post('/import', upload, importCategoriesController.handle)
 categoriesRouter.put('/:id', updateCategoryController.handle)
 categoriesRouter.delete('/:id', deleteCategoryController.handle)
 
