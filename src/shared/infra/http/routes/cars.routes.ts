@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import { CreateCarController } from '@/cars/useCases/createCar/CreateCarController'
+import { FindAllCarsController } from '@/cars/useCases/findAllCars/FindAllCarsController'
 
 import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
@@ -8,8 +9,10 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 const carsRouter = Router()
 
 const createCarController = new CreateCarController()
+const findAllCarsController = new FindAllCarsController()
 
 // public routes
+carsRouter.get('/', findAllCarsController.handle)
 
 // private routes
 carsRouter.use(ensureAuthenticated, ensureAdmin)

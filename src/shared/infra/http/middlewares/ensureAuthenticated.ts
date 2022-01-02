@@ -4,7 +4,7 @@ import { verify } from 'jsonwebtoken'
 import { env } from '@/config/env'
 import { AppError } from '@/shared/errors/AppError'
 
-export async function ensureAuthenticated(req: Request, _res: Response, next: NextFunction) {
+export function ensureAuthenticated(req: Request, _res: Response, next: NextFunction) {
   if (!req.headers.authorization) {
     throw new AppError('Token not provided', 401)
   }
