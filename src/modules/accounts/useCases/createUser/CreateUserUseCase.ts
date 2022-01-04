@@ -15,7 +15,7 @@ export class CreateUserUseCase {
     private usersRepository: UsersRepositoryInterface
   ) {}
 
-  async execute(data: CreateUserDTO) {
+  async execute(data: CreateUserDTO, admin = false) {
     const userExists = await this.usersRepository.findByEmail(data.email)
     if (userExists) throw new AppError('User already exists')
 
@@ -24,6 +24,8 @@ export class CreateUserUseCase {
     if (errors.length) throw new AppError(errors)
 
     user.password = hashSync(user.password, 10)
+    if (data.admin && !admin) throw new AppError('Only admins can create admin accounts')
+
     const result = await this.usersRepository.create(user)
 
     return instanceToPlain(result)
