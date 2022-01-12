@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 
 @injectable()
 export class FindAllCategoriesUseCase {

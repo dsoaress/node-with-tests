@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
-import { SpecificationsRepositoryInterface } from '@/cars/repositories/SpecificationsRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
+import { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
 
 @injectable()
 export class FindSpecificationUseCase {
@@ -14,7 +14,7 @@ export class FindSpecificationUseCase {
     const specification = await this.specificationsRepository.findById(id)
 
     if (!specification) {
-      throw new AppError('Specification not found')
+      throw new AppError('Specification not found', 404)
     }
 
     return specification

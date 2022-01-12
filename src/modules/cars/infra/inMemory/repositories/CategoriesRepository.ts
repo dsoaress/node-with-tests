@@ -1,5 +1,5 @@
-import { Category } from '@/cars/models/Category'
-import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
+import { Category } from '../../../models/Category'
+import { CategoriesRepositoryInterface } from '../../../repositories/CategoriesRepositoryInterface'
 
 export class CategoriesRepository implements CategoriesRepositoryInterface {
   categories: Category[] = []

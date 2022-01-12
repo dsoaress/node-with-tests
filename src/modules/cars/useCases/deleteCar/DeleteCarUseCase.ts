@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import { CarsRepositoryInterface } from '@/cars/repositories/CarsRepositoryInterface'
+import { CarsRepositoryInterface } from '../../repositories/CarsRepositoryInterface'
 
 @injectable()
 export class DeleteCarUseCase {

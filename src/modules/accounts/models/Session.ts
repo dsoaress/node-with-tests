@@ -1,7 +1,6 @@
 import cuid from 'cuid'
 
-import { env } from '@/config/env'
-
+import { env } from '../../../config/env'
 import { User } from './User'
 
 export class Session {

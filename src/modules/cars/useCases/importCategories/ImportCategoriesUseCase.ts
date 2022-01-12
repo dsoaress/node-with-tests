@@ -2,10 +2,10 @@ import { parse } from 'csv-parse'
 import { createReadStream } from 'fs'
 import { inject, injectable } from 'tsyringe'
 
-import { Category } from '@/cars/models/Category'
-import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
-import { deleteFile } from '@/utils/file'
+import { AppError } from '../../../../shared/errors/AppError'
+import { deleteFile } from '../../../../utils/file'
+import { Category } from '../../models/Category'
+import { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 
 @injectable()
 export class ImportCategoriesUseCase {

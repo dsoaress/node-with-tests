@@ -1,11 +1,10 @@
 import { Router } from 'express'
 
-import { CreateSpecificationController } from '@/cars/useCases/createSpecification/CreateSpecificationController'
-import { DeleteSpecificationController } from '@/cars/useCases/deleteSpecification/DeleteSpecificationController'
-import { FindAllSpecificationsController } from '@/cars/useCases/findAllSpecifications/FindAllSpecificationsController'
-import { FindSpecificationController } from '@/cars/useCases/findSpecification/FindSpecificationController'
-import { UpdateSpecificationController } from '@/cars/useCases/updateSpecification/UpdateSpecificationController'
-
+import { CreateSpecificationController } from '../../../../modules/cars/useCases/createSpecification/CreateSpecificationController'
+import { DeleteSpecificationController } from '../../../../modules/cars/useCases/deleteSpecification/DeleteSpecificationController'
+import { FindAllSpecificationsController } from '../../../../modules/cars/useCases/findAllSpecifications/FindAllSpecificationsController'
+import { FindSpecificationController } from '../../../../modules/cars/useCases/findSpecification/FindSpecificationController'
+import { UpdateSpecificationController } from '../../../../modules/cars/useCases/updateSpecification/UpdateSpecificationController'
 import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 

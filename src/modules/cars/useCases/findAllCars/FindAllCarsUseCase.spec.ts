@@ -1,12 +1,11 @@
 import 'reflect-metadata'
 
-import { CreateCarDTO } from '@/cars/dto/CreateCarDTO'
-import { CreateCategoryDTO } from '@/cars/dto/CreateCategoryDTO'
-import { CarsRepository } from '@/cars/infra/inMemory/repositories/CarsRepository'
-import { CategoriesRepository } from '@/cars/infra/inMemory/repositories/CategoriesRepository'
-import { CarsRepositoryInterface } from '@/cars/repositories/CarsRepositoryInterface'
-import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
-
+import { CreateCarDTO } from '../../dto/CreateCarDTO'
+import { CreateCategoryDTO } from '../../dto/CreateCategoryDTO'
+import { CarsRepository } from '../../infra/inMemory/repositories/CarsRepository'
+import { CategoriesRepository } from '../../infra/inMemory/repositories/CategoriesRepository'
+import { CarsRepositoryInterface } from '../../repositories/CarsRepositoryInterface'
+import { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 import { CreateCarUseCase } from '../createCar/CreateCarUseCase'
 import { CreateCategoryUseCase } from '../createCategory/CreateCategoryUseCase'
 import { FindAllCarsUseCase } from './FindAllCarsUseCase'

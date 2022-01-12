@@ -1,16 +1,16 @@
 import { Router } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
-import { CreateUserController } from '@/accounts/useCases/createUser/CreateUserController'
-import { DeleteUserController } from '@/accounts/useCases/deleteUser/DeleteUserController'
-import { FindAllUsersController } from '@/accounts/useCases/findAllUsers/FindAllUsersController'
-import { FindUserController } from '@/accounts/useCases/findUser/FindUserController'
-import { UpdateUserController } from '@/accounts/useCases/updateUser/UpdateUserController'
-import { UpdateUserAvatarController } from '@/accounts/useCases/updateUserAvatar/UpdateUserAvatarController'
-import { upload } from '@/config/upload'
-
+import { upload } from '../../../../config/upload'
+import { CreateUserController } from '../../../../modules/accounts/useCases/createUser/CreateUserController'
+import { DeleteUserController } from '../../../../modules/accounts/useCases/deleteUser/DeleteUserController'
+import { FindAllUsersController } from '../../../../modules/accounts/useCases/findAllUsers/FindAllUsersController'
+import { FindUserController } from '../../../../modules/accounts/useCases/findUser/FindUserController'
+import { UpdateUserController } from '../../../../modules/accounts/useCases/updateUser/UpdateUserController'
+import { UpdateUserAvatarController } from '../../../../modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController'
+import { AppError } from '../../../errors/AppError'
 import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
-import { ensureUser } from '../middlewares/ensureUser'
 
 const usersRouter = Router()
 

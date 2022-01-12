@@ -1,5 +1,5 @@
-import { User } from '@/accounts/models/User'
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { User } from '../../../models/User'
+import { UsersRepositoryInterface } from '../../../repositories/UsersRepositoryInterface'
 
 export class UsersRepository implements UsersRepositoryInterface {
   users: User[] = []

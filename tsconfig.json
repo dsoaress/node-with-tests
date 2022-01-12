@@ -1,13 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-     "paths": {
-      "@/accounts/*": ["src/modules/accounts/*"],
-      "@/cars/*": ["src/modules/cars/*"],
-      "@/config/*": ["src/config/*"],
-      "@/shared/*": ["src/shared/*"],
-      "@/utils/*": ["src/utils/*"]
-    },
     "target": "es2016",
     "module": "commonjs",
     "outDir": "dist",

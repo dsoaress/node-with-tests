@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
-import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
+import { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 
 @injectable()
 export class FindCategoryUseCase {
@@ -14,7 +14,7 @@ export class FindCategoryUseCase {
     const category = await this.categoriesRepository.findById(id)
 
     if (!category) {
-      throw new AppError('Category not found')
+      throw new AppError('Category not found', 404)
     }
 
     return category

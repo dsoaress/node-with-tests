@@ -1,8 +1,7 @@
 import { getRepository, Repository } from 'typeorm'
 
-import { User } from '@/accounts/models/User'
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
-
+import { User } from '../../../models/User'
+import { UsersRepositoryInterface } from '../../../repositories/UsersRepositoryInterface'
 import { UserEntity } from '../entities/UserEntity'
 
 export class UsersRepository implements UsersRepositoryInterface {

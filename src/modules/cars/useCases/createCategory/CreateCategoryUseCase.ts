@@ -1,10 +1,10 @@
 import { validate } from 'class-validator'
 import { inject, injectable } from 'tsyringe'
 
-import { CreateCategoryDTO } from '@/cars/dto/CreateCategoryDTO'
-import { Category } from '@/cars/models/Category'
-import { CategoriesRepositoryInterface } from '@/cars/repositories/CategoriesRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
+import { CreateCategoryDTO } from '../../dto/CreateCategoryDTO'
+import { Category } from '../../models/Category'
+import { CategoriesRepositoryInterface } from '../../repositories/CategoriesRepositoryInterface'
 
 @injectable()
 export class CreateCategoryUseCase {

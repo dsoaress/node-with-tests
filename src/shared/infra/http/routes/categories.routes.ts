@@ -1,13 +1,12 @@
 import { Router } from 'express'
 
-import { CreateCategoryController } from '@/cars/useCases/createCategory/CreateCategoryController'
-import { DeleteCategoryController } from '@/cars/useCases/deleteCategory/DeleteCategoryController'
-import { FindAllCategoriesController } from '@/cars/useCases/findAllCategories/FindAllCategoriesController'
-import { FindCategoryController } from '@/cars/useCases/findCategory/FindCategoryController'
-import { ImportCategoriesController } from '@/cars/useCases/importCategories/ImportCategoriesController'
-import { UpdateCategoryController } from '@/cars/useCases/updateCategory/UpdateCategoryController'
-import { upload } from '@/config/upload'
-
+import { upload } from '../../../../config/upload'
+import { CreateCategoryController } from '../../../../modules/cars/useCases/createCategory/CreateCategoryController'
+import { DeleteCategoryController } from '../../../../modules/cars/useCases/deleteCategory/DeleteCategoryController'
+import { FindAllCategoriesController } from '../../../../modules/cars/useCases/findAllCategories/FindAllCategoriesController'
+import { FindCategoryController } from '../../../../modules/cars/useCases/findCategory/FindCategoryController'
+import { ImportCategoriesController } from '../../../../modules/cars/useCases/importCategories/ImportCategoriesController'
+import { UpdateCategoryController } from '../../../../modules/cars/useCases/updateCategory/UpdateCategoryController'
 import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 

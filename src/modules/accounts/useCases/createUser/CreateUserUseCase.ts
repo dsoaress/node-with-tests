@@ -3,10 +3,10 @@ import { instanceToPlain } from 'class-transformer'
 import { validate } from 'class-validator'
 import { inject, injectable } from 'tsyringe'
 
-import { CreateUserDTO } from '@/accounts/dto/CreateUserDTO'
-import { User } from '@/accounts/models/User'
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
+import { CreateUserDTO } from '../../dto/CreateUserDTO'
+import { User } from '../../models/User'
+import { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 
 @injectable()
 export class CreateUserUseCase {

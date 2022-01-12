@@ -1,13 +1,12 @@
 import 'reflect-metadata'
 
-import { AuthenticateUserDTO } from '@/accounts/dto/AuthenticateUserDTO'
-import { CreateUserDTO } from '@/accounts/dto/CreateUserDTO'
-import { SessionsRepository } from '@/accounts/infra/inMemory/repositories/SessionsRepository'
-import { UsersRepository } from '@/accounts/infra/inMemory/repositories/UsersRepository'
-import { SessionsRepositoryInterface } from '@/accounts/repositories/SessionsRepositoryInterface'
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
-
+import { AppError } from '../../../../shared/errors/AppError'
+import { AuthenticateUserDTO } from '../../dto/AuthenticateUserDTO'
+import { CreateUserDTO } from '../../dto/CreateUserDTO'
+import { SessionsRepository } from '../../infra/inMemory/repositories/SessionsRepository'
+import { UsersRepository } from '../../infra/inMemory/repositories/UsersRepository'
+import { SessionsRepositoryInterface } from '../../repositories/SessionsRepositoryInterface'
+import { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
 

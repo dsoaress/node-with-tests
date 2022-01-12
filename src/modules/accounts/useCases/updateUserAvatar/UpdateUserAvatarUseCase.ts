@@ -1,9 +1,10 @@
 import { instanceToPlain } from 'class-transformer'
 import { inject, injectable } from 'tsyringe'
 
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
-import { deleteFile } from '@/utils/file'
+import { AppError } from '../../../../shared/errors/AppError'
+import { deleteFile } from '../../../../utils/file'
+import { User } from '../../models/User'
+import { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 
 @injectable()
 export class UpdateUserAvatarUseCase {

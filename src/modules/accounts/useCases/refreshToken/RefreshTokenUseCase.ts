@@ -2,11 +2,11 @@ import { instanceToPlain } from 'class-transformer'
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
-import { Session } from '@/accounts/models/Session'
-import { SessionsRepositoryInterface } from '@/accounts/repositories/SessionsRepositoryInterface'
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
-import { env } from '@/config/env'
-import { AppError } from '@/shared/errors/AppError'
+import { env } from '../../../../config/env'
+import { AppError } from '../../../../shared/errors/AppError'
+import { Session } from '../../models/Session'
+import { SessionsRepositoryInterface } from '../../repositories/SessionsRepositoryInterface'
+import { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 
 @injectable()
 export class RefreshTokenUseCase {
@@ -54,13 +54,13 @@ export class RefreshTokenUseCase {
       admin: user.admin
     }
 
-    const token = sign(jwtPayload, env.JWT_SECRET, {
+    const accessToken = sign(jwtPayload, env.JWT_SECRET, {
       expiresIn: env.JWT_EXPIRES_AT
     })
 
     return {
-      ...instanceToPlain(user),
-      token,
+      user: instanceToPlain(user),
+      accessToken,
       refreshToken: session.id
     }
   }

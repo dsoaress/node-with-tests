@@ -1,10 +1,10 @@
 import { validate } from 'class-validator'
 import { inject, injectable } from 'tsyringe'
 
-import { CreateSpecificationDTO } from '@/cars/dto/CreateSpecificationDTO'
-import { Specification } from '@/cars/models/Specification'
-import { SpecificationsRepositoryInterface } from '@/cars/repositories/SpecificationsRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
+import { CreateSpecificationDTO } from '../../dto/CreateSpecificationDTO'
+import { Specification } from '../../models/Specification'
+import { SpecificationsRepositoryInterface } from '../../repositories/SpecificationsRepositoryInterface'
 
 @injectable()
 export class CreateSpecificationUseCase {

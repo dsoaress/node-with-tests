@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
-import { CarsRepositoryInterface } from '@/cars/repositories/CarsRepositoryInterface'
-import { AppError } from '@/shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
+import { CarsRepositoryInterface } from '../../repositories/CarsRepositoryInterface'
 
 @injectable()
 export class FindCarUseCase {
@@ -14,7 +14,7 @@ export class FindCarUseCase {
     const car = await this.carsRepository.findById(id)
 
     if (!car) {
-      throw new AppError('Car not found')
+      throw new AppError('Car not found', 404)
     }
 
     return car

@@ -1,10 +1,9 @@
 import { Router } from 'express'
 
-import { CreateCarController } from '@/cars/useCases/createCar/CreateCarController'
-import { DeleteCarController } from '@/cars/useCases/deleteCar/DeleteCarController'
-import { FindAllCarsController } from '@/cars/useCases/findAllCars/FindAllCarsController'
-import { FindCarController } from '@/cars/useCases/findCar/FindCarController'
-
+import { CreateCarController } from '../../../../modules/cars/useCases/createCar/CreateCarController'
+import { DeleteCarController } from '../../../../modules/cars/useCases/deleteCar/DeleteCarController'
+import { FindAllCarsController } from '../../../../modules/cars/useCases/findAllCars/FindAllCarsController'
+import { FindCarController } from '../../../../modules/cars/useCases/findCar/FindCarController'
 import { ensureAdmin } from '../middlewares/ensureAdmin'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 

@@ -1,7 +1,7 @@
 import { instanceToPlain } from 'class-transformer'
 import { inject, injectable } from 'tsyringe'
 
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
+import { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 
 @injectable()
 export class FindAllUsersUseCase {

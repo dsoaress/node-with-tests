@@ -1,9 +1,8 @@
 import 'reflect-metadata'
 
-import { CreateUserDTO } from '@/accounts/dto/CreateUserDTO'
-import { UsersRepository } from '@/accounts/infra/inMemory/repositories/UsersRepository'
-import { UsersRepositoryInterface } from '@/accounts/repositories/UsersRepositoryInterface'
-
+import { CreateUserDTO } from '../../dto/CreateUserDTO'
+import { UsersRepository } from '../../infra/inMemory/repositories/UsersRepository'
+import { UsersRepositoryInterface } from '../../repositories/UsersRepositoryInterface'
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
 import { FindUserUseCase } from '../findUser/FindUserUseCase'
 

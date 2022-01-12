@@ -1,5 +1,5 @@
-import { Session } from '@/accounts/models/Session'
-import { SessionsRepositoryInterface } from '@/accounts/repositories/SessionsRepositoryInterface'
+import { Session } from '../../../models/Session'
+import { SessionsRepositoryInterface } from '../../../repositories/SessionsRepositoryInterface'
 
 export class SessionsRepository implements SessionsRepositoryInterface {
   sessions: Session[] = []

@@ -1,8 +1,7 @@
 import { getRepository, Repository } from 'typeorm'
 
-import { Car } from '@/cars/models/Car'
-import { CarsRepositoryInterface } from '@/cars/repositories/CarsRepositoryInterface'
-
+import { Car } from '../../../models/Car'
+import { CarsRepositoryInterface } from '../../../repositories/CarsRepositoryInterface'
 import { CarEntity } from '../entities/CarEntity'
 
 export class CarsRepository implements CarsRepositoryInterface {
