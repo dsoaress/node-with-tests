@@ -21,6 +21,6 @@ router.use('/categories', categoriesRouter)
 router.use('/specifications', specificationsRouter)
 router.use('/users', usersRouter)
 
-router.use(appErrorHandling, notFoundErrorHandling)
+router.use(notFoundErrorHandling, appErrorHandling)
 
 export { router }

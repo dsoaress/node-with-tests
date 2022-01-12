@@ -21,15 +21,23 @@ const updateUserController = new UpdateUserController()
 const updateUserAvatarController = new UpdateUserAvatarController()
 const deleteUserController = new DeleteUserController()
 
+export function ensureUser(req: Request, _res: Response, next: NextFunction) {
+  const hasPermission = req.user.id === req.params.id || req.user.admin
+  if (!hasPermission) throw new AppError('Forbidden', 403)
+  next()
+}
+
 // public route
 usersRouter.post('/', createUserController.handle)
 
 // private routes
-usersRouter.use(ensureAuthenticated, ensureUser)
+usersRouter.use(ensureAuthenticated)
+usersRouter.get('/:id', ensureUser, findUserController.handle)
+usersRouter.patch('/:id', ensureUser, updateUserController.handle)
+usersRouter.patch('/update-avatar/:id', ensureUser, upload, updateUserAvatarController.handle)
+usersRouter.delete('/:id', ensureUser, deleteUserController.handle)
+
+// admin only routes
 usersRouter.get('/', ensureAdmin, findAllUsersController.handle)
-usersRouter.get('/:id', findUserController.handle)
-usersRouter.patch('/:id', updateUserController.handle)
-usersRouter.patch('/update-avatar/:id', upload, updateUserAvatarController.handle)
-usersRouter.delete('/:id', deleteUserController.handle)
 
 export { usersRouter }

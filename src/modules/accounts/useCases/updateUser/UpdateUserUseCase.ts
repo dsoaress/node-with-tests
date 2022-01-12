@@ -15,13 +15,25 @@ export class UpdateUserUseCase {
     private usersRepository: UsersRepositoryInterface
   ) {}
 
-  async execute(id: string, data: UpdateUserDTO) {
-    const user = await this.usersRepository.update(id, data)
+  async execute(id: string, data: UpdateUserDTO, admin = false) {
+    const user = await this.usersRepository.findById(id)
+    if (!user) throw new AppError('User not found', 404)
+    if (data.admin && !admin) throw new AppError('Only admins can update admin privileges')
 
-    if (!user) {
-      throw new Error('User not found')
+    if (data.password) {
+      if (!data.oldPassword) throw new AppError('Password cannot be updated without old password')
+      const passwordMatch = compareSync(data.oldPassword, user.password)
+      if (!passwordMatch) throw new AppError('Old password is incorrect')
+      data.password = hashSync(data.password, 10)
+      delete data.oldPassword
     }
 
-    return instanceToPlain(user)
+    const updatedUser = new User({ ...user, ...data })
+    const errors = await validate(updatedUser)
+    if (errors.length > 0) throw new AppError(errors)
+
+    await this.usersRepository.update(id, updatedUser)
+
+    return instanceToPlain(updatedUser)
   }
 }

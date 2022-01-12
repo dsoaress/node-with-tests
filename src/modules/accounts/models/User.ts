@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer'
-import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import cuid from 'cuid'
 
 export class User {
@@ -12,8 +12,8 @@ export class User {
   @IsEmail()
   email!: string
 
+  @IsNotEmpty()
   @IsString()
-  @Length(8, 32)
   @Exclude()
   password!: string
 
@@ -36,7 +36,8 @@ export class User {
     if (!this.id) this.id = cuid()
     if (!this.admin) this.admin = false
     if (!this.createdAt) this.createdAt = new Date()
-    this.updatedAt = new Date()
+
+    data.updatedAt = new Date()
 
     Object.assign(this, data)
   }

@@ -13,25 +13,15 @@ export class UpdateUserAvatarUseCase {
     private usersRepository: UsersRepositoryInterface
   ) {}
 
-  async execute(userId: string, avatarFilename?: string) {
-    if (!avatarFilename) {
-      throw new AppError('You must provide an avatar filename')
-    }
+  async execute(id: string, avatar?: string) {
+    if (!avatar) throw new AppError('You must provide an avatar filename')
 
-    const user = await this.usersRepository.findById(userId)
+    const user = await this.usersRepository.findById(id)
+    if (!user) throw new AppError('User not found', 404)
+    if (user.avatar) await deleteFile(user.avatar)
 
-    if (!user) {
-      throw new AppError('User not found', 404)
-    }
-
-    if (user.avatar) {
-      await deleteFile(user.avatar)
-    }
-
-    const updatedUser = await this.usersRepository.update(userId, {
-      ...user,
-      avatar: avatarFilename
-    })
+    const updatedUser = new User({ ...user, avatar })
+    await this.usersRepository.update(id, updatedUser)
 
     return instanceToPlain(updatedUser)
   }

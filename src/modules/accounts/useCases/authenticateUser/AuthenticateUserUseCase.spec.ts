@@ -39,8 +39,8 @@ describe('AuthenticateUserUseCase', () => {
 
   it('should be able to authenticate a user', async () => {
     await createUserUseCase.execute(user)
-    const { token, refreshToken } = await authenticateUserUseCase.execute(credentials)
-    expect(token && refreshToken).toBeTruthy()
+    const { accessToken, refreshToken } = await authenticateUserUseCase.execute(credentials)
+    expect(accessToken && refreshToken).toBeTruthy()
   })
 
   it('should not be able to authenticate a user with an invalid email', async () => {

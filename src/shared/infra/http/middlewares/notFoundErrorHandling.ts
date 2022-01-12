@@ -1,11 +1,5 @@
-import { NextFunction, Request, Response } from 'express'
+import { AppError } from '../../../errors/AppError'
 
-export function notFoundErrorHandling(_req: Request, res: Response, next: NextFunction) {
-  res.status(404).json({
-    status: 404,
-    error: 'Unable to find the requested resource',
-    timestamp: new Date().toISOString()
-  })
-
-  next()
+export function notFoundErrorHandling() {
+  throw new AppError('Unable to find the requested resource', 404)
 }

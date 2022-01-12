@@ -59,13 +59,8 @@ describe('CreateUserUseCase', () => {
     await expect(createUserUseCase.execute(user)).rejects.toBeInstanceOf(AppError)
   })
 
-  it('should not be able to create a user with an invalid password (less then 8 characters)', async () => {
-    user.password = '1234567'
-    await expect(createUserUseCase.execute(user)).rejects.toBeInstanceOf(AppError)
-  })
-
-  it('should not be able to create a user with an invalid password (more then 32 characters)', async () => {
-    user.password = '123456789012345678901234567890123'
+  it('should not be able to create a user with an empty email', async () => {
+    user.password = ''
     await expect(createUserUseCase.execute(user)).rejects.toBeInstanceOf(AppError)
   })
 

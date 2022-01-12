@@ -1,3 +1,5 @@
 import { CreateUserDTO } from './CreateUserDTO'
 
-export type UpdateUserDTO = Partial<CreateUserDTO>
+export type UpdateUserDTO = Partial<CreateUserDTO> & {
+  oldPassword?: string
+}
